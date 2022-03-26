@@ -2,3 +2,27 @@ body {
     min-height: 100vh;
     background-color: aliceblue !important;
 }
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(250, 248, 244);
+    height: 100vh;
+}
+
+.quiz-container {
+    display: flex;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    background-color: rgb(233, 248, 248);
+    width: 1200px;
+    height: 700px;
+}
+
+.left {
+    border-radius: 12px 0px 0px 12px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    background-color: rgb(6, 6, 78);
+    width: 250px;
+}
