@@ -26,3 +26,8 @@ body {
     background-color: rgb(6, 6, 78);
     width: 250px;
 }
+
+.right {
+    object-fit: cover;
+    width: 100%;
+}
