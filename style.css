@@ -115,3 +115,9 @@ body {
         transform: scale(1, 1);
     }
 }
+
+.quiz-footer {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+}

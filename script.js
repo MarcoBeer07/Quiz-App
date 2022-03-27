@@ -8,10 +8,10 @@ let questions = [{
     },
     {
         "question": "Mit welchem Attribut erstellt man eine Unsortierte Liste ?",
-        "answer_1": "<a>",
-        "answer_2": "<ul>",
-        "answer_3": "<img>",
-        "answer_4": "<table>",
+        "answer_1": "a",
+        "answer_2": "ul",
+        "answer_3": "img",
+        "answer_4": "table",
         "right_answer": 2
     },
     {
@@ -34,12 +34,11 @@ let questions = [{
 ];
 
 
-
 let currentQuestion = 0;
 
 
 function init() {
-
+    document.getElementById('all-questions').innerHTML = questions.length;
     showQuestion()
 
 }
@@ -47,6 +46,7 @@ function init() {
 
 function showQuestion() {
     let question = questions[currentQuestion];
+    document.getElementById('current-question').innerHTML = currentQuestion + 1;
 
     document.getElementById('questiontext').innerHTML = question['question'];
     document.getElementById('answer_1').innerHTML = question['answer_1'];
@@ -59,10 +59,36 @@ function answer(selection) {
     let question = questions[currentQuestion];
     let selectedQuestionNumber = selection.slice(-1);
 
+    let idOfRightAnswer = `answer_${question['right_answer']}`;
+
     if (selectedQuestionNumber == question["right_answer"]) {
         document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
+        document.getElementById('next-button').disabled = false;
     } else {
         document.getElementById(selection).parentNode.classList.add("bg-danger", "answer");
+        document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success", "zoom-in-out-box");
+        document.getElementById('next-button').disabled = false;
+
     }
 
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    showQuestion();
+
+    document.getElementById('next-button').disabled = true;
+
+    resetAnswerButtons();
+}
+
+function resetAnswerButtons() {
+    document.getElementById('answer_1').parentNode.classList.remove("bg-danger", "answer", "zoom-in-out-box");
+    document.getElementById('answer_1').parentNode.classList.remove("bg-success", "answer", "zoom-in-out-box");
+    document.getElementById('answer_2').parentNode.classList.remove("bg-danger", "answer", "zoom-in-out-box");
+    document.getElementById('answer_2').parentNode.classList.remove("bg-success", "answer", "zoom-in-out-box");
+    document.getElementById('answer_3').parentNode.classList.remove("bg-danger", "answer", "zoom-in-out-box");
+    document.getElementById('answer_3').parentNode.classList.remove("bg-success", "answer", "zoom-in-out-box");
+    document.getElementById('answer_4').parentNode.classList.remove("bg-danger", "answer", "zoom-in-out-box");
+    document.getElementById('answer_4').parentNode.classList.remove("bg-success", "answer", "zoom-in-out-box");
 }
