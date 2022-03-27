@@ -16,7 +16,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     background-color: rgb(233, 248, 248);
-    width: 1200px;
+    width: 1100px;
     height: 700px;
 }
 
@@ -24,10 +24,39 @@ body {
     border-radius: 12px 0px 0px 12px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     background-color: rgb(6, 6, 78);
-    width: 250px;
+    display: flex;
+    justify-content: center;
+    width: 350px;
+}
+
+.left img {
+    margin-top: 30px;
+    width: 120px;
+    height: 100px;
 }
 
 .right {
-    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     width: 100%;
+}
+
+.quiz-content {
+    width: 500px;
+}
+
+.quiz-content h2 {
+    padding-bottom: 30px;
+}
+
+.question-place {
+    margin: 10px;
+    background-color: grey;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    font-weight: bold;
+    font-size: 30px;
 }
