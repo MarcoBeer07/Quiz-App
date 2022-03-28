@@ -37,6 +37,8 @@ let questions = [{
 let currentQuestion = 0;
 let amountOfQuestions = questions.length;
 let rightQuestions = 0;
+let AUDIO_SUCCESS = new Audio('sound/success.mp3');
+let AUDIO_FAIL = new Audio('sound/wrong.mp3');
 
 function init() {
     document.getElementById('all-questions').innerHTML = questions.length;
@@ -44,34 +46,46 @@ function init() {
 
 }
 
+function gameIsOver() {
+    return currentQuestion >= questions.length;
+}
 
 function showQuestion() {
-    if (currentQuestion >= questions.length) {
+    if (gameIsOver()) {
         // Endscreen
-        document.getElementById('quiz-content').innerHTML = `
-        <div class="endscreen">
-            <div><img src="img/brain-result.png"></div>
-            <div><h1>Quiz abgeschlossen</h1></div>
-            <div class="score"><h2>Deine Punktzahl: <h2> ${rightQuestions} </h2> <h2>/</h2> <h2> ${amountOfQuestions}</h2> </h2></div>
-            <div><button onclick="restartGame()" type="button" class="btn btn-primary" id="next-button">Neu Starten</button></div>
-        </div>
-        `
-    } else { // Show question
-        let question = questions[currentQuestion];
-
-        let percent = currentQuestion / questions.length;
-        percent = percent * 100;
-
-        document.getElementById('progress-bar').innerHTML = `${percent} %`
-        document.getElementById('progress-bar').style = `width: ${percent}%`
-
-        document.getElementById('current-question').innerHTML = currentQuestion + 1;
-        document.getElementById('questiontext').innerHTML = question['question'];
-        document.getElementById('answer_1').innerHTML = question['answer_1'];
-        document.getElementById('answer_2').innerHTML = question['answer_2'];
-        document.getElementById('answer_3').innerHTML = question['answer_3'];
-        document.getElementById('answer_4').innerHTML = question['answer_4'];
+        showEndScreen();
+    } else {
+        // Show question
+        updateProgressBar();
+        updateToNextQuestion();
     }
+}
+
+function showEndScreen() {
+    document.getElementById('quiz-content').innerHTML = `
+    <div class="endscreen">
+        <div><img src="img/brain-result.png"></div>
+        <div><h1>Quiz abgeschlossen</h1></div>
+        <div class="score"><h2>Deine Punktzahl: <h2> ${rightQuestions} </h2> <h2>/</h2> <h2> ${amountOfQuestions}</h2> </h2></div>
+        <div><button onclick="restartGame()" type="button" class="btn btn-primary" id="next-button">Neu Starten</button></div>
+    </div>`
+}
+
+function updateProgressBar() {
+    let percent = currentQuestion / questions.length;
+    percent = percent * 100;
+    document.getElementById('progress-bar').innerHTML = `${percent} %`
+    document.getElementById('progress-bar').style = `width: ${percent}%`
+}
+
+function updateToNextQuestion() {
+    let question = questions[currentQuestion];
+    document.getElementById('current-question').innerHTML = currentQuestion + 1;
+    document.getElementById('questiontext').innerHTML = question['question'];
+    document.getElementById('answer_1').innerHTML = question['answer_1'];
+    document.getElementById('answer_2').innerHTML = question['answer_2'];
+    document.getElementById('answer_3').innerHTML = question['answer_3'];
+    document.getElementById('answer_4').innerHTML = question['answer_4'];
 }
 
 
@@ -79,21 +93,21 @@ function showQuestion() {
 function answer(selection) {
     let question = questions[currentQuestion];
     let selectedQuestionNumber = selection.slice(-1);
-
     let idOfRightAnswer = `answer_${question['right_answer']}`;
 
     if (selectedQuestionNumber == question["right_answer"]) {
         document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
         document.getElementById('next-button').disabled = false;
+        AUDIO_SUCCESS.play();
         rightQuestions++;
     } else {
         document.getElementById(selection).parentNode.classList.add("bg-danger", "answer");
         document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success", "zoom-in-out-box");
         document.getElementById('next-button').disabled = false;
-
+        AUDIO_FAIL.play();
     }
-
 }
+
 
 function nextQuestion() {
     currentQuestion++;
