@@ -52,11 +52,19 @@ function showQuestion() {
         <div class="endscreen">
             <div><img src="img/brain-result.png"></div>
             <div><h1>Quiz abgeschlossen</h1></div>
-            <div class="score"><h2>Deine Punktzahl: <h2> ${rightQuestions} </h2> <h2>/</h2> <h2> ${amountOfQuestions}</h2> </h2>
+            <div class="score"><h2>Deine Punktzahl: <h2> ${rightQuestions} </h2> <h2>/</h2> <h2> ${amountOfQuestions}</h2> </h2></div>
+            <div><button onclick="restartGame()" type="button" class="btn btn-primary" id="next-button">Neu Starten</button></div>
         </div>
         `
-    } else {
+    } else { // Show question
         let question = questions[currentQuestion];
+
+        let percent = currentQuestion / questions.length;
+        percent = percent * 100;
+
+        document.getElementById('progress-bar').innerHTML = `${percent} %`
+        document.getElementById('progress-bar').style = `width: ${percent}%`
+
         document.getElementById('current-question').innerHTML = currentQuestion + 1;
         document.getElementById('questiontext').innerHTML = question['question'];
         document.getElementById('answer_1').innerHTML = question['answer_1'];
@@ -65,6 +73,8 @@ function showQuestion() {
         document.getElementById('answer_4').innerHTML = question['answer_4'];
     }
 }
+
+
 
 function answer(selection) {
     let question = questions[currentQuestion];
@@ -105,4 +115,10 @@ function resetAnswerButtons() {
     document.getElementById('answer_3').parentNode.classList.remove("bg-success", "answer", "zoom-in-out-box");
     document.getElementById('answer_4').parentNode.classList.remove("bg-danger", "answer", "zoom-in-out-box");
     document.getElementById('answer_4').parentNode.classList.remove("bg-success", "answer", "zoom-in-out-box");
+}
+
+function restartGame() {
+    currentQuestion = 0
+    rightQuestions = 0
+    init();
 }

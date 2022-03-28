@@ -55,12 +55,17 @@
                         <div class="card-body fw-bold fs-5" id="answer_4" onclick="answer('answer_4')">
                         </div>
                     </div>
+                    <div class="progress">
+                        <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%">%</div>
+                    </div>
                     <div class="quiz-footer">
+
                         <div>
                             Frage <b id="current-question"></b> von <b id="all-questions"></b>
                         </div>
                         <button onclick="nextQuestion()" type="button" class="btn btn-primary" id="next-button" disabled>Nächste Frage</button>
                     </div>
+
                 </div>
             </div>
         </div>
