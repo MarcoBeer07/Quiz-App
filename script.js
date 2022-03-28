@@ -42,9 +42,19 @@ let AUDIO_FAIL = new Audio('sound/wrong.mp3');
 
 function init() {
     document.getElementById('all-questions').innerHTML = questions.length;
-    showQuestion()
+    showQuestion();
 
 }
+
+
+
+function restartGame() {
+    document.getElementById('quiz-content').innerHTML = '';
+    currentQuestion = 0;
+    rightQuestions = 0;
+    init();
+}
+
 
 function gameIsOver() {
     return currentQuestion >= questions.length;
@@ -70,6 +80,7 @@ function showEndScreen() {
         <div><button onclick="restartGame()" type="button" class="btn btn-primary" id="next-button">Neu Starten</button></div>
     </div>`
 }
+
 
 function updateProgressBar() {
     let percent = currentQuestion / questions.length;
@@ -129,10 +140,4 @@ function resetAnswerButtons() {
     document.getElementById('answer_3').parentNode.classList.remove("bg-success", "answer", "zoom-in-out-box");
     document.getElementById('answer_4').parentNode.classList.remove("bg-danger", "answer", "zoom-in-out-box");
     document.getElementById('answer_4').parentNode.classList.remove("bg-success", "answer", "zoom-in-out-box");
-}
-
-function restartGame() {
-    currentQuestion = 0
-    rightQuestions = 0
-    init();
 }
