@@ -1,5 +1,5 @@
 let questions = [{
-        "question": "Wer hat HTML erfunden?",
+        "question": "Wer hat HTML erfunden ?",
         "answer_1": "Robbie Williams",
         "answer_2": "Lady Gaga",
         "answer_3": "Tim Berners-Lee",
@@ -24,11 +24,19 @@ let questions = [{
     },
     {
         "question": "Wie fügt man eine JS Variable in HTML ein ? ",
-        "answer_1": "<var>variable</var>",
+        "answer_1": "add variable",
         "answer_2": "<${variable}>",
-        "answer_3": "<a>variable</a>",
-        "answer_4": "<table>variable</tabl>",
+        "answer_3": "import variable",
+        "answer_4": "show variable",
         "right_answer": 2
+    },
+    {
+        "question": "Wie erstellt man eine Tabelle in HTML ?  ",
+        "answer_1": "ul",
+        "answer_2": "img",
+        "answer_3": "table",
+        "answer_4": "p",
+        "right_answer": 3
     }
 
 ];
@@ -41,6 +49,7 @@ let AUDIO_SUCCESS = new Audio('sound/success.mp3');
 let AUDIO_FAIL = new Audio('sound/wrong.mp3');
 
 function init() {
+
     document.getElementById('all-questions').innerHTML = questions.length;
     showQuestion();
 
@@ -49,7 +58,7 @@ function init() {
 
 
 function restartGame() {
-    document.getElementById('quiz-content').innerHTML = '';
+    location.reload()
     currentQuestion = 0;
     rightQuestions = 0;
     init();
@@ -74,9 +83,9 @@ function showQuestion() {
 function showEndScreen() {
     document.getElementById('quiz-content').innerHTML = `
     <div class="endscreen">
-        <div><img src="img/brain-result.png"></div>
-        <div><h1>Quiz abgeschlossen</h1></div>
-        <div class="score"><h2>Deine Punktzahl: <h2> ${rightQuestions} </h2> <h2>/</h2> <h2> ${amountOfQuestions}</h2> </h2></div>
+        <div class="endscreen-img"><img src="img/brain-result.png"></div>
+        <div class="endscreen.text"><h1>Quiz abgeschlossen</h1></div>
+        <div class="score"><h2>Deine Punktzahl:&nbsp; <h2 class="score-points">${rightQuestions}</h2> <h2>/</h2 "score-points"> <h2> ${amountOfQuestions}</h2> </h2></div>
         <div><button onclick="restartGame()" type="button" class="btn btn-primary" id="next-button">Neu Starten</button></div>
     </div>`
 }
