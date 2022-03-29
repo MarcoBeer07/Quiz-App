@@ -38,8 +38,9 @@ let questions = [{
         "answer_4": "p",
         "right_answer": 3
     }
-
 ];
+
+
 
 
 let currentQuestion = 0;
@@ -87,6 +88,7 @@ function showEndScreen() {
         <div class="endscreen.text"><h1>Quiz abgeschlossen</h1></div>
         <div class="score"><h2>Deine Punktzahl:&nbsp; <h2 class="score-points">${rightQuestions}</h2> <h2>/</h2 "score-points"> <h2> ${amountOfQuestions}</h2> </h2></div>
         <div><button onclick="restartGame()" type="button" class="btn btn-primary" id="next-button">Neu Starten</button></div>
+        <div class="trophy"> <img src="img/tropy.png"></div>
     </div>`
 }
 
