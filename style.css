@@ -88,6 +88,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            height: 100%;
             width: 100%;
         }
         
@@ -201,4 +202,22 @@
         .trophy {
             position: absolute;
             right: 0;
+        }
+        
+        .startscreen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-image: url(img/brainbg.jpg);
+            background-size: contain;
+        }
+        
+        .startscreen h1 {
+            padding-bottom: 10px;
+        }
+        
+        .startscreen button {
+            margin-top: 30px;
         }

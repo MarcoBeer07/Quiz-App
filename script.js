@@ -41,23 +41,109 @@ let questions = [{
 ];
 
 
-
-
 let currentQuestion = 0;
 let amountOfQuestions = questions.length;
 let rightQuestions = 0;
 let AUDIO_SUCCESS = new Audio('sound/success.mp3');
 let AUDIO_FAIL = new Audio('sound/wrong.mp3');
 
-function init() {
 
+function init() {
+    showHtml()
+}
+
+function showGame() {
+    document.getElementById('quiz-content').innerHTML = `
+    <div class="quiz-content">
+        <div class="question-text">
+            <h2 id="questiontext"></h2>
+        </div>
+
+        <div class="card mb-3 d-flex flex-row border-0 align-items-center ">
+            <div class="question-place">A</div>
+            <div class="card-body  fs-5" id="answer_1" onclick="answer('answer_1')">
+            </div>
+        </div>
+
+        <div class="card mb-3 d-flex flex-row border-0 align-items-center">
+            <div class="question-place">B</div>
+            <div class="card-body fs-5" id="answer_2" onclick="answer('answer_2')">
+            </div>
+        </div>
+
+        <div class="card mb-3 d-flex flex-row border-0 align-items-center">
+            <div class="question-place">C</div>
+            <div class="card-body fs-5" id="answer_3" onclick="answer('answer_3')">
+            </div>
+        </div>
+
+        <div class="card mb-3 d-flex flex-row border-0 align-items-center">
+            <div class="question-place">D</div>
+            <div class="card-body fs-5" id="answer_4" onclick="answer('answer_4')">
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%">%</div>
+        </div>
+        <div class="quiz-footer">
+
+            <div>
+                Frage <b id="current-question"></b> von <b id="all-questions"></b>
+            </div>
+            <button onclick="nextQuestion()" type="button" class="btn btn-primary" id="next-button" disabled>Nächste Frage</button>
+        </div>
+    </div>
+    `
+}
+
+//HTML Quiz
+function showHtml() {
+    document.getElementById('quiz-content').innerHTML = `
+    <div class="startscreen">
+        <div><h1>Wilkommen zum HTML Quiz</h1></div>
+        <div><h3>Bist du bereit ?</h3></div>
+        <div><button onclick="startHtmlQuiz()" type="button" class="btn btn-warning " id="next-button">Quiz Starten</button></div>
+    </div>`
+}
+
+function startHtmlQuiz() {
+    showGame()
     document.getElementById('all-questions').innerHTML = questions.length;
     showQuestion();
+}
+
+//CSS Quiz
+function showCss() {
+    document.getElementById('quiz-content').innerHTML = `
+    <div class="startscreen">
+        <div><h1>Wilkommen zum CSS Quiz</h1></div>
+        <div><h3>Bist du bereit ?</h3></div>
+        <div><button onclick="startCssQuiz()" type="button" class="btn btn-warning" id="next-button">Quiz Starten</button></div>
+    </div>`
+}
+
+function startCssQuiz() {
+    showGame()
+    document.getElementById('all-questions').innerHTML = questions.length;
+    showQuestion();
+}
+
+//Javascript Quiz
+function showJs() {
+    document.getElementById('quiz-content').innerHTML = `
+    <div class="startscreen">
+        <div><h1>Wilkommen zum Javascript Quiz</h1></div>
+        <div><h3>Bist du bereit ?</h3></div>
+        <div><button onclick="startJsQuiz()" type="button" class="btn btn-warning" id="next-button">Quiz Starten</button></div>
+    </div>`
+}
+
+function startJsQuiz() {
 
 }
 
 
-
+//Spiel neu starten
 function restartGame() {
     location.reload()
     currentQuestion = 0;
@@ -120,8 +206,8 @@ function answer(selection) {
     if (selectedQuestionNumber == question["right_answer"]) {
         document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
         document.getElementById('next-button').disabled = false;
-        AUDIO_SUCCESS.play();
         rightQuestions++;
+        AUDIO_SUCCESS.play();
     } else {
         document.getElementById(selection).parentNode.classList.add("bg-danger", "answer");
         document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success", "zoom-in-out-box");
