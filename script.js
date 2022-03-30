@@ -1,4 +1,4 @@
-let questions = [{
+let questionsHtml = [{
         "question": "Wer hat HTML erfunden ?",
         "answer_1": "Robbie Williams",
         "answer_2": "Lady Gaga",
@@ -40,9 +40,80 @@ let questions = [{
     }
 ];
 
+let questionsCss = [{
+        "question": "Wofür steht CSS ?",
+        "answer_1": "Creative Style Sheets",
+        "answer_2": "Colorful Style Sheets",
+        "answer_3": "Cascading Style Sheets",
+        "answer_4": "Computer Style Sheets",
+        "right_answer": 3
+    },
+    {
+        "question": "Wo wird in der HTML datei eine CSS datei implementiert ?",
+        "answer_1": "Im Head",
+        "answer_2": "Im Body",
+        "answer_3": "Nirgends",
+        "answer_4": "In einer DIV",
+        "right_answer": 1
+    },
+    {
+        "question": "Wie wird einem HTML object ein CSS Style gegeben ?  ",
+        "answer_1": "Font",
+        "answer_2": "Styles",
+        "answer_3": "Class",
+        "answer_4": "Style",
+        "right_answer": 3
+    },
+    {
+        "question": "Wie fügt man in einer CSS Datei einen Kommentar ein ? ",
+        "answer_1": "//Kommentar",
+        "answer_2": "/*Kommentar*/",
+        "answer_3": "//Kommentar//",
+        "answer_4": "``Kommentar``",
+        "right_answer": 2
+    }
+];
 
+let questionsJs = [{
+        "question": "Wofür sind die Klammern hinter den FUNCTION-Variablen ?",
+        "answer_1": "Für Parameter",
+        "answer_2": "Für Funktions-Werte",
+        "answer_3": "Für Variablen",
+        "answer_4": "Für events",
+        "right_answer": 3
+    },
+    {
+        "question": "Welche JavaScript-Funktion wird zum schließen von PopUp-Fenstern benutzt ?",
+        "answer_1": "close.window()",
+        "answer_2": "windowclose()",
+        "answer_3": "window.close()",
+        "answer_4": "window.close",
+        "right_answer": 2
+    },
+    {
+        "question": "Wo wird eine JS Datei im HTML Dokument eingefügt ?",
+        "answer_1": "Im Body",
+        "answer_2": "Im Head",
+        "answer_3": "In einer DIV",
+        "answer_4": "Im TITLE",
+        "right_answer": 2
+    },
+    {
+        "question": "Wie erhöt man in JS eine Zahl immer +1 ?",
+        "answer_1": "++",
+        "answer_2": "+1",
+        "answer_3": "-1",
+        "answer_4": "*1",
+        "right_answer": 1
+    }
+
+];
+
+let html = false;
+let css = false;
+let js = false;
 let currentQuestion = 0;
-let amountOfQuestions = questions.length;
+let amountOfQuestions = questionsHtml.length;
 let rightQuestions = 0;
 let AUDIO_SUCCESS = new Audio('sound/success.mp3');
 let AUDIO_FAIL = new Audio('sound/wrong.mp3');
@@ -104,11 +175,15 @@ function showHtml() {
         <div><h3>Bist du bereit ?</h3></div>
         <div><button onclick="startHtmlQuiz()" type="button" class="btn btn-warning " id="next-button">Quiz Starten</button></div>
     </div>`
+    html = true;
+    css = false;
+    js = false;
+    return html;
 }
 
 function startHtmlQuiz() {
     showGame()
-    document.getElementById('all-questions').innerHTML = questions.length;
+    document.getElementById('all-questions').innerHTML = questionsHtml.length;
     showQuestion();
 }
 
@@ -120,11 +195,15 @@ function showCss() {
         <div><h3>Bist du bereit ?</h3></div>
         <div><button onclick="startCssQuiz()" type="button" class="btn btn-warning" id="next-button">Quiz Starten</button></div>
     </div>`
+    html = false;
+    css = true;
+    js = false;
+    return css;
 }
 
 function startCssQuiz() {
     showGame()
-    document.getElementById('all-questions').innerHTML = questions.length;
+    document.getElementById('all-questions').innerHTML = questionsHtml.length;
     showQuestion();
 }
 
@@ -136,14 +215,20 @@ function showJs() {
         <div><h3>Bist du bereit ?</h3></div>
         <div><button onclick="startJsQuiz()" type="button" class="btn btn-warning" id="next-button">Quiz Starten</button></div>
     </div>`
+    js = true;
+    html = false;
+    css = false;
+    return js;
 }
 
 function startJsQuiz() {
-
+    showGame()
+    document.getElementById('all-questions').innerHTML = questionsHtml.length;
+    showQuestion();
 }
 
 
-//Spiel neu starten
+//Reset Game
 function restartGame() {
     location.reload()
     currentQuestion = 0;
@@ -153,9 +238,10 @@ function restartGame() {
 
 
 function gameIsOver() {
-    return currentQuestion >= questions.length;
+    return currentQuestion >= questionsHtml.length;
 }
 
+//Show the Questions
 function showQuestion() {
     if (gameIsOver()) {
         // Endscreen
@@ -180,26 +266,48 @@ function showEndScreen() {
 
 
 function updateProgressBar() {
-    let percent = currentQuestion / questions.length;
+    let percent = currentQuestion / questionsHtml.length;
     percent = percent * 100;
     document.getElementById('progress-bar').innerHTML = `${percent} %`
     document.getElementById('progress-bar').style = `width: ${percent}%`
 }
 
 function updateToNextQuestion() {
-    let question = questions[currentQuestion];
-    document.getElementById('current-question').innerHTML = currentQuestion + 1;
-    document.getElementById('questiontext').innerHTML = question['question'];
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
+    let questionCss = questionsCss[currentQuestion];
+    let questionHtml = questionsHtml[currentQuestion];
+    let questionJs = questionsJs[currentQuestion];
+
+    if (html == true) {
+
+        document.getElementById('current-question').innerHTML = currentQuestion + 1;
+        document.getElementById('questiontext').innerHTML = questionHtml['question'];
+        document.getElementById('answer_1').innerHTML = questionHtml['answer_1'];
+        document.getElementById('answer_2').innerHTML = questionHtml['answer_2'];
+        document.getElementById('answer_3').innerHTML = questionHtml['answer_3'];
+        document.getElementById('answer_4').innerHTML = questionHtml['answer_4'];
+    } else if (css == true) {
+
+        document.getElementById('current-question').innerHTML = currentQuestion + 1;
+        document.getElementById('questiontext').innerHTML = questionCss['question'];
+        document.getElementById('answer_1').innerHTML = questionCss['answer_1'];
+        document.getElementById('answer_2').innerHTML = questionCss['answer_2'];
+        document.getElementById('answer_3').innerHTML = questionCss['answer_3'];
+        document.getElementById('answer_4').innerHTML = questionCss['answer_4'];
+    } else if (js == true) {
+
+        document.getElementById('current-question').innerHTML = currentQuestion + 1;
+        document.getElementById('questiontext').innerHTML = questionJs['question'];
+        document.getElementById('answer_1').innerHTML = questionJs['answer_1'];
+        document.getElementById('answer_2').innerHTML = questionJs['answer_2'];
+        document.getElementById('answer_3').innerHTML = questionJs['answer_3'];
+        document.getElementById('answer_4').innerHTML = questionJs['answer_4'];
+    }
 }
 
 
 
 function answer(selection) {
-    let question = questions[currentQuestion];
+    let question = questionsHtml[currentQuestion];
     let selectedQuestionNumber = selection.slice(-1);
     let idOfRightAnswer = `answer_${question['right_answer']}`;
 
@@ -220,7 +328,7 @@ function answer(selection) {
 function nextQuestion() {
     currentQuestion++;
     showQuestion();
-    if (currentQuestion < questions.length) {
+    if (currentQuestion < questionsHtml.length) {
         document.getElementById('next-button').disabled = true;
         resetAnswerButtons();
     } else {
