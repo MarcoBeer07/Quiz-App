@@ -113,7 +113,11 @@ let html = false;
 let css = false;
 let js = false;
 let currentQuestion = 0;
-let amountOfQuestions = questionsHtml.length;
+
+let amountOfHtmlQuestions = questionsHtml.length;
+let amountOfCssQuestions = questionsCss.length;
+let amountOfJsQuestions = questionsJs.length;
+
 let rightQuestions = 0;
 let AUDIO_SUCCESS = new Audio('sound/success.mp3');
 let AUDIO_FAIL = new Audio('sound/wrong.mp3');
@@ -170,11 +174,16 @@ function showGame() {
 //HTML Quiz
 function showHtml() {
     document.getElementById('quiz-content').innerHTML = `
-    <div class="startscreen">
-        <div><h1>Wilkommen zum HTML Quiz</h1></div>
-        <div><h3>Bist du bereit ?</h3></div>
-        <div><button onclick="startHtmlQuiz()" type="button" class="btn btn-warning " id="next-button">Quiz Starten</button></div>
-    </div>`
+    <div class="startscreen-box">
+        <div class="startscreen">
+            <div><h1>Wilkommen zum HTML Quiz</h1></div>
+            <div><h3>Bist du bereit ?</h3></div>  
+        </div>
+        <div class="start-button-box">
+            <button onclick="startHtmlQuiz()" class="start-button">QUIZ STARTEN <img class="start-arrow" src="img/arrow-25-24.png"</button>
+        </div>
+    </div>
+    `
     html = true;
     css = false;
     js = false;
@@ -182,6 +191,8 @@ function showHtml() {
 }
 
 function startHtmlQuiz() {
+    currentQuestion = 0;
+    rightQuestions = 0;
     showGame()
     document.getElementById('all-questions').innerHTML = questionsHtml.length;
     showQuestion();
@@ -190,11 +201,16 @@ function startHtmlQuiz() {
 //CSS Quiz
 function showCss() {
     document.getElementById('quiz-content').innerHTML = `
-    <div class="startscreen">
-        <div><h1>Wilkommen zum CSS Quiz</h1></div>
-        <div><h3>Bist du bereit ?</h3></div>
-        <div><button onclick="startCssQuiz()" type="button" class="btn btn-warning" id="next-button">Quiz Starten</button></div>
-    </div>`
+    <div class="startscreen-box">
+        <div class="startscreen">
+            <div><h1>Wilkommen zum CSS Quiz</h1></div>
+            <div><h3>Bist du bereit ?</h3></div>  
+        </div>
+        <div class="start-button-box">
+            <button onclick="startCssQuiz()" class="start-button">QUIZ STARTEN <img class="start-arrow" src="img/arrow-25-24.png"</button>
+        </div>
+    </div>
+    `
     html = false;
     css = true;
     js = false;
@@ -202,19 +218,27 @@ function showCss() {
 }
 
 function startCssQuiz() {
+    currentQuestion = 0;
+    rightQuestions = 0;
     showGame()
-    document.getElementById('all-questions').innerHTML = questionsHtml.length;
+    document.getElementById('all-questions').innerHTML = questionsCss.length;
     showQuestion();
+
 }
 
 //Javascript Quiz
 function showJs() {
     document.getElementById('quiz-content').innerHTML = `
-    <div class="startscreen">
-        <div><h1>Wilkommen zum Javascript Quiz</h1></div>
-        <div><h3>Bist du bereit ?</h3></div>
-        <div><button onclick="startJsQuiz()" type="button" class="btn btn-warning" id="next-button">Quiz Starten</button></div>
-    </div>`
+    <div class="startscreen-box">
+        <div class="startscreen">
+            <div><h1>Wilkommen zum Javascript Quiz</h1></div>
+            <div><h3>Bist du bereit ?</h3></div>  
+        </div>
+        <div class="start-button-box">
+            <button onclick="startJsQuiz()" class="start-button">QUIZ STARTEN <img class="start-arrow" src="img/arrow-25-24.png"</button>
+        </div>
+    </div>
+    `
     js = true;
     html = false;
     css = false;
@@ -222,23 +246,41 @@ function showJs() {
 }
 
 function startJsQuiz() {
+    currentQuestion = 0;
+    rightQuestions = 0;
     showGame()
-    document.getElementById('all-questions').innerHTML = questionsHtml.length;
+    document.getElementById('all-questions').innerHTML = questionsJs.length;
     showQuestion();
 }
 
 
 //Reset Game
 function restartGame() {
-    location.reload()
-    currentQuestion = 0;
-    rightQuestions = 0;
-    init();
+    if (html == true) {
+        currentQuestion = 0;
+        rightQuestions = 0;
+        startHtmlQuiz();
+    } else if (css == true) {
+        currentQuestion = 0;
+        rightQuestions = 0;
+        startCssQuiz();
+    } else if (js == true) {
+        currentQuestion = 0;
+        rightQuestions = 0;
+        startJsQuiz();
+    }
 }
 
 
 function gameIsOver() {
-    return currentQuestion >= questionsHtml.length;
+    if (html == true) {
+        return currentQuestion >= questionsHtml.length;
+    } else if (css == true) {
+        return currentQuestion >= questionsCss.length;
+    } else if (js == true) {
+        return currentQuestion >= questionsJs.length;
+
+    }
 }
 
 //Show the Questions
@@ -254,22 +296,56 @@ function showQuestion() {
 }
 
 function showEndScreen() {
-    document.getElementById('quiz-content').innerHTML = `
+
+    if (html == true) {
+        document.getElementById('quiz-content').innerHTML = `
     <div class="endscreen">
         <div class="endscreen-img"><img src="img/brain-result.png"></div>
         <div class="endscreen.text"><h1>Quiz abgeschlossen</h1></div>
-        <div class="score"><h2>Deine Punktzahl:&nbsp; <h2 class="score-points">${rightQuestions}</h2> <h2>/</h2 "score-points"> <h2> ${amountOfQuestions}</h2> </h2></div>
+        <div class="score"><h2>Deine Punktzahl:&nbsp; <h2 class="score-points">${rightQuestions}</h2> <h2>/</h2 "score-points"> <h2> ${amountOfHtmlQuestions}</h2> </h2></div>
         <div><button onclick="restartGame()" type="button" class="btn btn-primary" id="next-button">Neu Starten</button></div>
         <div class="trophy"> <img src="img/tropy.png"></div>
     </div>`
+    } else if (css == true) {
+        document.getElementById('quiz-content').innerHTML = `
+    <div class="endscreen">
+        <div class="endscreen-img"><img src="img/brain-result.png"></div>
+        <div class="endscreen.text"><h1>Quiz abgeschlossen</h1></div>
+        <div class="score"><h2>Deine Punktzahl:&nbsp; <h2 class="score-points">${rightQuestions}</h2> <h2>/</h2 "score-points"> <h2> ${amountOfCssQuestions}</h2> </h2></div>
+        <div><button onclick="restartGame()" type="button" class="btn btn-primary" id="next-button">Neu Starten</button></div>
+        <div class="trophy"> <img src="img/tropy.png"></div>
+    </div>`
+    } else if (js == true) {
+        document.getElementById('quiz-content').innerHTML = `
+    <div class="endscreen">
+        <div class="endscreen-img"><img src="img/brain-result.png"></div>
+        <div class="endscreen.text"><h1>Quiz abgeschlossen</h1></div>
+        <div class="score"><h2>Deine Punktzahl:&nbsp; <h2 class="score-points">${rightQuestions}</h2> <h2>/</h2 "score-points"> <h2> ${amountOfJsQuestions}</h2> </h2></div>
+        <div><button onclick="restartGame()" type="button" class="btn btn-primary" id="next-button">Neu Starten</button></div>
+        <div class="trophy"> <img src="img/tropy.png"></div>
+    </div>`
+    }
 }
 
 
 function updateProgressBar() {
-    let percent = currentQuestion / questionsHtml.length;
-    percent = percent * 100;
-    document.getElementById('progress-bar').innerHTML = `${percent} %`
-    document.getElementById('progress-bar').style = `width: ${percent}%`
+
+    if (html == true) {
+        let percent = currentQuestion / questionsHtml.length;
+        percent = percent * 100;
+        document.getElementById('progress-bar').innerHTML = `${percent} %`
+        document.getElementById('progress-bar').style = `width: ${percent}%`
+    } else if (css == true) {
+        let percent = currentQuestion / questionsCss.length;
+        percent = percent * 100;
+        document.getElementById('progress-bar').innerHTML = `${percent} %`
+        document.getElementById('progress-bar').style = `width: ${percent}%`
+    } else if (js == true) {
+        let percent = currentQuestion / questionsJs.length;
+        percent = percent * 100;
+        document.getElementById('progress-bar').innerHTML = `${percent} %`
+        document.getElementById('progress-bar').style = `width: ${percent}%`
+    }
 }
 
 function updateToNextQuestion() {
@@ -307,20 +383,50 @@ function updateToNextQuestion() {
 
 
 function answer(selection) {
-    let question = questionsHtml[currentQuestion];
+    let questionHtml = questionsHtml[currentQuestion];
+    let questionCss = questionsCss[currentQuestion];
+    let questionJs = questionsCss[currentQuestion];
     let selectedQuestionNumber = selection.slice(-1);
-    let idOfRightAnswer = `answer_${question['right_answer']}`;
+    let idOfRightAnswerHtml = `answer_${questionHtml['right_answer']}`;
+    let idOfRightAnswerCss = `answer_${questionCss['right_answer']}`;
+    let idOfRightAnswerJs = `answer_${questionJs['right_answer']}`;
 
-    if (selectedQuestionNumber == question["right_answer"]) {
-        document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
-        document.getElementById('next-button').disabled = false;
-        rightQuestions++;
-        AUDIO_SUCCESS.play();
-    } else {
-        document.getElementById(selection).parentNode.classList.add("bg-danger", "answer");
-        document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success", "zoom-in-out-box");
-        document.getElementById('next-button').disabled = false;
-        AUDIO_FAIL.play();
+    if (html == true) {
+        if (selectedQuestionNumber == questionHtml["right_answer"]) {
+            document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
+            document.getElementById('next-button').disabled = false;
+            rightQuestions++;
+            AUDIO_SUCCESS.play();
+        } else {
+            document.getElementById(selection).parentNode.classList.add("bg-danger", "answer");
+            document.getElementById(idOfRightAnswerHtml).parentNode.classList.add("bg-success", "zoom-in-out-box");
+            document.getElementById('next-button').disabled = false;
+            AUDIO_FAIL.play();
+        }
+    } else if (css == true) {
+        if (selectedQuestionNumber == questionCss["right_answer"]) {
+            document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
+            document.getElementById('next-button').disabled = false;
+            rightQuestions++;
+            AUDIO_SUCCESS.play();
+        } else {
+            document.getElementById(selection).parentNode.classList.add("bg-danger", "answer");
+            document.getElementById(idOfRightAnswerCss).parentNode.classList.add("bg-success", "zoom-in-out-box");
+            document.getElementById('next-button').disabled = false;
+            AUDIO_FAIL.play();
+        }
+    } else if (js == true) {
+        if (selectedQuestionNumber == questionJs["right_answer"]) {
+            document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
+            document.getElementById('next-button').disabled = false;
+            rightQuestions++;
+            AUDIO_SUCCESS.play();
+        } else {
+            document.getElementById(selection).parentNode.classList.add("bg-danger", "answer");
+            document.getElementById(idOfRightAnswerJs).parentNode.classList.add("bg-success", "zoom-in-out-box");
+            document.getElementById('next-button').disabled = false;
+            AUDIO_FAIL.play();
+        }
     }
 }
 
@@ -328,11 +434,27 @@ function answer(selection) {
 function nextQuestion() {
     currentQuestion++;
     showQuestion();
-    if (currentQuestion < questionsHtml.length) {
-        document.getElementById('next-button').disabled = true;
-        resetAnswerButtons();
-    } else {
-        showQuestion()
+    if (html == true) {
+        if (currentQuestion < questionsHtml.length) {
+            document.getElementById('next-button').disabled = true;
+            resetAnswerButtons();
+        } else {
+            showQuestion()
+        }
+    } else if (css == true) {
+        if (currentQuestion < questionsCss.length) {
+            document.getElementById('next-button').disabled = true;
+            resetAnswerButtons();
+        } else {
+            showQuestion()
+        }
+    } else if (js == true) {
+        if (currentQuestion < questionsJs.length) {
+            document.getElementById('next-button').disabled = true;
+            resetAnswerButtons();
+        } else {
+            showQuestion()
+        }
     }
 }
 
