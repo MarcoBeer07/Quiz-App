@@ -9,11 +9,19 @@
             font-family: 'Rubik', sans-serif;
         }
         
+        .headline-box {
+            display: none;
+        }
+        
+        .menu {
+            display: none;
+        }
+        
         .main-container {
             display: flex;
             justify-content: center;
             background-color: rgb(253, 251, 246);
-            padding-top: 30px;
+            padding-top: 70px;
             height: 100vh;
         }
         
