@@ -1,117 +1,7 @@
-let questionsHtml = [{
-        "question": "Wer hat HTML erfunden ?",
-        "answer_1": "Robbie Williams",
-        "answer_2": "Lady Gaga",
-        "answer_3": "Tim Berners-Lee",
-        "answer_4": "Justin Bieber",
-        "right_answer": 3
-    },
-    {
-        "question": "Mit welchem Attribut erstellt man eine Unsortierte Liste ?",
-        "answer_1": "a",
-        "answer_2": "ul",
-        "answer_3": "img",
-        "answer_4": "table",
-        "right_answer": 2
-    },
-    {
-        "question": "Was bedeutet HTML ? ",
-        "answer_1": "Hypertext Markup Language",
-        "answer_2": "Hybrid Text Module Loading",
-        "answer_3": "Hypertext Module Large",
-        "answer_4": "Hyper Toggle Module Language",
-        "right_answer": 1
-    },
-    {
-        "question": "Wie fügt man eine JS Variable in HTML ein ? ",
-        "answer_1": "add variable",
-        "answer_2": "<${variable}>",
-        "answer_3": "import variable",
-        "answer_4": "show variable",
-        "right_answer": 2
-    },
-    {
-        "question": "Wie erstellt man eine Tabelle in HTML ?  ",
-        "answer_1": "ul",
-        "answer_2": "img",
-        "answer_3": "table",
-        "answer_4": "p",
-        "right_answer": 3
-    }
-];
-
-let questionsCss = [{
-        "question": "Wofür steht CSS ?",
-        "answer_1": "Creative Style Sheets",
-        "answer_2": "Colorful Style Sheets",
-        "answer_3": "Cascading Style Sheets",
-        "answer_4": "Computer Style Sheets",
-        "right_answer": 3
-    },
-    {
-        "question": "Wo wird in der HTML datei eine CSS datei implementiert ?",
-        "answer_1": "Im Head",
-        "answer_2": "Im Body",
-        "answer_3": "Nirgends",
-        "answer_4": "In einer DIV",
-        "right_answer": 1
-    },
-    {
-        "question": "Wie wird einem HTML object ein CSS Style gegeben ?  ",
-        "answer_1": "Font",
-        "answer_2": "Styles",
-        "answer_3": "Class",
-        "answer_4": "Style",
-        "right_answer": 3
-    },
-    {
-        "question": "Wie fügt man in einer CSS Datei einen Kommentar ein ? ",
-        "answer_1": "//Kommentar",
-        "answer_2": "/*Kommentar*/",
-        "answer_3": "//Kommentar//",
-        "answer_4": "``Kommentar``",
-        "right_answer": 2
-    }
-];
-
-let questionsJs = [{
-        "question": "Wofür sind die Klammern hinter den FUNCTION-Variablen ?",
-        "answer_1": "Für Parameter",
-        "answer_2": "Für Funktions-Werte",
-        "answer_3": "Für Variablen",
-        "answer_4": "Für events",
-        "right_answer": 3
-    },
-    {
-        "question": "Welche JavaScript-Funktion wird zum schließen von PopUp-Fenstern benutzt ?",
-        "answer_1": "close.window()",
-        "answer_2": "windowclose()",
-        "answer_3": "window.close()",
-        "answer_4": "window.close",
-        "right_answer": 2
-    },
-    {
-        "question": "Wo wird eine JS Datei im HTML Dokument eingefügt ?",
-        "answer_1": "Im Body",
-        "answer_2": "Im Head",
-        "answer_3": "In einer DIV",
-        "answer_4": "Im TITLE",
-        "right_answer": 2
-    },
-    {
-        "question": "Wie erhöt man in JS eine Zahl immer +1 ?",
-        "answer_1": "++",
-        "answer_2": "+1",
-        "answer_3": "-1",
-        "answer_4": "*1",
-        "right_answer": 1
-    }
-
-];
-
 let html = false;
 let css = false;
 let js = false;
+
 let currentQuestion = 0;
 
 let amountOfHtmlQuestions = questionsHtml.length;
@@ -119,6 +9,7 @@ let amountOfCssQuestions = questionsCss.length;
 let amountOfJsQuestions = questionsJs.length;
 
 let rightQuestions = 0;
+
 let AUDIO_SUCCESS = new Audio('sound/success.mp3');
 let AUDIO_FAIL = new Audio('sound/wrong.mp3');
 
@@ -128,47 +19,7 @@ function init() {
 }
 
 function showGame() {
-    document.getElementById('quiz-content').innerHTML = `
-    <div class="quiz-content">
-        <div class="question-text">
-            <h2 id="questiontext"></h2>
-        </div>
-
-        <div class="card mb-3 d-flex flex-row border-0 align-items-center ">
-            <div class="question-place">A</div>
-            <div class="card-body  fs-5" id="answer_1" onclick="answer('answer_1')">
-            </div>
-        </div>
-
-        <div class="card mb-3 d-flex flex-row border-0 align-items-center">
-            <div class="question-place">B</div>
-            <div class="card-body fs-5" id="answer_2" onclick="answer('answer_2')">
-            </div>
-        </div>
-
-        <div class="card mb-3 d-flex flex-row border-0 align-items-center">
-            <div class="question-place">C</div>
-            <div class="card-body fs-5" id="answer_3" onclick="answer('answer_3')">
-            </div>
-        </div>
-
-        <div class="card mb-3 d-flex flex-row border-0 align-items-center">
-            <div class="question-place">D</div>
-            <div class="card-body fs-5" id="answer_4" onclick="answer('answer_4')">
-            </div>
-        </div>
-        <div class="progress">
-            <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%">%</div>
-        </div>
-        <div class="quiz-footer">
-
-            <div>
-                Frage <b id="current-question"></b> von <b id="all-questions"></b>
-            </div>
-            <button onclick="nextQuestion()" type="button" class="btn btn-primary" id="next-button" disabled>Nächste Frage</button>
-        </div>
-    </div>
-    `
+    document.getElementById('quiz-content').innerHTML = showQuiz();
 }
 
 //HTML Quiz
@@ -279,7 +130,6 @@ function gameIsOver() {
         return currentQuestion >= questionsCss.length;
     } else if (js == true) {
         return currentQuestion >= questionsJs.length;
-
     }
 }
 
@@ -354,7 +204,6 @@ function updateToNextQuestion() {
     let questionJs = questionsJs[currentQuestion];
 
     if (html == true) {
-
         document.getElementById('current-question').innerHTML = currentQuestion + 1;
         document.getElementById('questiontext').innerHTML = questionHtml['question'];
         document.getElementById('answer_1').innerHTML = questionHtml['answer_1'];
@@ -362,7 +211,6 @@ function updateToNextQuestion() {
         document.getElementById('answer_3').innerHTML = questionHtml['answer_3'];
         document.getElementById('answer_4').innerHTML = questionHtml['answer_4'];
     } else if (css == true) {
-
         document.getElementById('current-question').innerHTML = currentQuestion + 1;
         document.getElementById('questiontext').innerHTML = questionCss['question'];
         document.getElementById('answer_1').innerHTML = questionCss['answer_1'];
@@ -370,7 +218,6 @@ function updateToNextQuestion() {
         document.getElementById('answer_3').innerHTML = questionCss['answer_3'];
         document.getElementById('answer_4').innerHTML = questionCss['answer_4'];
     } else if (js == true) {
-
         document.getElementById('current-question').innerHTML = currentQuestion + 1;
         document.getElementById('questiontext').innerHTML = questionJs['question'];
         document.getElementById('answer_1').innerHTML = questionJs['answer_1'];
@@ -383,15 +230,12 @@ function updateToNextQuestion() {
 
 
 function answer(selection) {
-    let questionHtml = questionsHtml[currentQuestion];
-    let questionCss = questionsCss[currentQuestion];
-    let questionJs = questionsCss[currentQuestion];
+
     let selectedQuestionNumber = selection.slice(-1);
-    let idOfRightAnswerHtml = `answer_${questionHtml['right_answer']}`;
-    let idOfRightAnswerCss = `answer_${questionCss['right_answer']}`;
-    let idOfRightAnswerJs = `answer_${questionJs['right_answer']}`;
 
     if (html == true) {
+        let questionHtml = questionsHtml[currentQuestion];
+        let idOfRightAnswerHtml = `answer_${questionHtml['right_answer']}`
         if (selectedQuestionNumber == questionHtml["right_answer"]) {
             document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
             document.getElementById('next-button').disabled = false;
@@ -404,6 +248,8 @@ function answer(selection) {
             AUDIO_FAIL.play();
         }
     } else if (css == true) {
+        let questionCss = questionsCss[currentQuestion];
+        let idOfRightAnswerCss = `answer_${questionCss['right_answer']}`;
         if (selectedQuestionNumber == questionCss["right_answer"]) {
             document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
             document.getElementById('next-button').disabled = false;
@@ -416,6 +262,8 @@ function answer(selection) {
             AUDIO_FAIL.play();
         }
     } else if (js == true) {
+        let questionJs = questionsJs[currentQuestion];
+        let idOfRightAnswerJs = `answer_${questionJs['right_answer']}`;
         if (selectedQuestionNumber == questionJs["right_answer"]) {
             document.getElementById(selection).parentNode.classList.add("bg-success", "zoom-in-out-box");
             document.getElementById('next-button').disabled = false;
