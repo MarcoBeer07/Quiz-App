@@ -16,7 +16,12 @@ let AUDIO_FAIL = new Audio('sound/wrong.mp3');
 
 function init() {
     includeHTML();
-    showHtml();
+    mainStartscreen();
+}
+
+function mainStartscreen() {
+    document.getElementById('quiz-content').innerHTML = showMainStartscreen();
+
 }
 
 function showGame() {

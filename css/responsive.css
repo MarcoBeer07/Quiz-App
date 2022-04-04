@@ -1,5 +1,15 @@
 @media (max-width: 1000px) {
+    html {
+        height: 100%;
+    }
+    body {
+        height: 100%;
+        max-height: unset;
+    }
     /*Menu*/
+    .header-box {
+        display: none;
+    }
     .headline-box {
         color: white;
         background-color: rgb(6, 6, 78);
@@ -7,10 +17,13 @@
         justify-content: center;
     }
     .headline-box h1 {
-        min-height: 5vh;
         line-height: unset;
         position: relative;
         z-index: 1;
+    }
+    .headline-box a {
+        text-decoration: none;
+        color: white;
     }
     .responsive-menu {
         background-color: rgb(6, 6, 78);
@@ -21,7 +34,7 @@
         transition: all 400ms ease-in-out;
     }
     .show-responsive-menu {
-        height: 100px;
+        height: 120px;
         transform: translateY(0px);
         transition: all 600ms ease-in-out;
         border-bottom-style: solid;
@@ -39,6 +52,9 @@
         align-items: center;
         padding-top: 10px;
         font-weight: bold;
+    }
+    .menu-link {
+        padding-bottom: 10px;
     }
     .headline-transition {
         animation: trans-in 600ms;
@@ -73,22 +89,18 @@
         right: 30px;
     }
     /*Quiz*/
-    body {
-        min-height: 100vh;
-    }
     .left {
         display: none;
     }
     .right {
         width: 100%;
-        height: 95vh;
     }
     .main-container {
-        height: 95vh;
         padding-top: 0px;
+        padding-bottom: 0px;
     }
     .quiz-container {
-        height: 95vh;
+        height: 100vh;
     }
     .quiz-content {
         width: 100%;
@@ -122,5 +134,59 @@
     }
     .quiz-footer {
         padding-top: 35px;
+    }
+    .main-button-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-button-box button {
+        width: 300px;
+        margin-bottom: 10px;
+    }
+    .footer-box {
+        background-color: rgb(6, 6, 78);
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 0px;
+    }
+    .footer {
+        display: flex;
+        justify-content: space-around;
+    }
+    .footer a {
+        text-decoration: none;
+        color: white;
+        padding: 20px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    .impressum {
+        padding-left: 0px;
+        padding: 10px;
+        text-align: center;
+    }
+    .impressum h2 {
+        line-height: 50px;
+    }
+    .datenschutz {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding: 20px;
+        font-size: 20px;
+        text-align: center;
+    }
+    .datenschutz h1 {
+        text-align: center;
+        font-size: 30px;
+    }
+    .datenschutz h2 {
+        font-size: 25px;
+        display: block;
+    }
+    .datenschutz a {
+        word-break: break-all;
     }
 }

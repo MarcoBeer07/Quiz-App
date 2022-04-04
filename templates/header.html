@@ -25,44 +25,13 @@
     <title>QuizApp</title>
 </head>
 
-<body id="body" onload="init()">
+<body>
 
-
-    <div w3-include-html="templates/header.html"></div>
-
-
-
-    <div class="headline-box">
+    <div class="header-box">
         <a href="index.html">
-            <div class="headline">
-                <h1 id="headline">QuizApp</h1>
+            <div class="main-header">
+                <h1>QuizApp</h1>
             </div>
         </a>
-        <div>
-            <a onclick="showMenu()" class="burger-link"><img class="burger" src="img/menu-4-24.png"></a>
-        </div>
     </div>
-    <div w3-include-html="templates/responsive-menü.html"></div>
-
-
-    <div class="main-container">
-        <div class="quiz-container">
-            <div class="left">
-                <div onclick="mainStartscreen()" class="quiz-logo"><img src="img/logo.png"></div>
-                <div class="choose-quiz-container">
-                    <div onclick="showHtml()" class="choose-link"><a>HTML</a></div>
-                    <div onclick="showCss()" class="choose-link"><a>CSS</a></div>
-                    <div onclick="showJs()" class="choose-link"><a>JS</a></div>
-                </div>
-            </div>
-
-            <div class="right" id="quiz-content">
-
-            </div>
-        </div>
-    </div>
-    <div w3-include-html="templates/footer.html"></div>
-
 </body>
-
-</html>

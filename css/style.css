@@ -1,12 +1,33 @@
         .html {
             scroll-behavior: smooth;
+            height: 100%;
+            max-height: 100%;
+            margin: 0;
         }
         
         body {
-            min-height: 100vh;
+            max-height: 100%;
+            margin: 0;
             background-color: aliceblue !important;
             font-family: 'Raleway', sans-serif;
             font-family: 'Rubik', sans-serif;
+        }
+        
+        .impressum {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+            padding-top: 50px;
+            padding-left: 30px;
+        }
+        
+        .datenschutz {
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+            padding-top: 50px;
+            padding-left: 30px;
         }
         
         .headline-box {
@@ -20,9 +41,12 @@
         .main-container {
             display: flex;
             justify-content: center;
-            background-color: rgb(253, 251, 246);
-            padding-top: 70px;
-            height: 100vh;
+            background-color: aliceblue !important;
+            padding-top: 150px;
+            padding-bottom: 150px;
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
         }
         
         .quiz-container {
@@ -32,6 +56,26 @@
             background-color: rgb(233, 248, 248);
             width: 1000px;
             height: 600px;
+        }
+        
+        .header-box {
+            background-color: rgb(6, 6, 78);
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        
+        .header-box h1 {
+            color: white;
+            font-size: 30px;
+            padding-left: 15px;
+        }
+        
+        .main-header:hover {
+            cursor: pointer;
+        }
+        
+        .header-box a {
+            text-decoration: none;
         }
         
         .left {
@@ -64,6 +108,10 @@
         
         .quiz-logo {
             padding-bottom: 70px;
+        }
+        
+        .quiz-logo:hover {
+            cursor: pointer;
         }
         
         .choose-link {
@@ -224,20 +272,20 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            height: 58%;
-            padding-top: 120px;
+            height: 45%;
+            padding-top: 100px;
         }
         
         .startscreen h1 {
             padding-bottom: 10px;
+            color: black;
         }
         
         .start-button-box {
-            height: 42%;
+            height: 40%;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             align-items: flex-end;
-            padding-right: 100px;
             padding-bottom: 80px;
         }
         
@@ -262,4 +310,44 @@
         
         .start-arrow {
             padding-left: 10px;
+        }
+        
+        .main-button-box {
+            padding-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .main-button-box button {
+            width: 300px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-box {
+            background-color: rgb(6, 6, 78);
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 60px;
+        }
+        
+        .footer {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer a {
+            text-decoration: none;
+            color: white;
+            padding: 20px;
+            padding-bottom: 0px;
+            padding-top: 0px;
+            font-size: 18px;
+        }
+        
+        .footer a:hover {
+            transform: scale(1.15);
+            color: white;
         }

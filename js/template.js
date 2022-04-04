@@ -91,6 +91,21 @@ function nextQuestionJs() {
     }
 }
 
+//If answer is selected, the other answers will be locked
+function lockAnswers() {
+    for (i = 1; i < 5; i++) {
+        document.getElementById('answer_' + i).style.pointerEvents = 'none';
+    }
+}
+
+//If next question is choosed, the  answers will be unlocked
+
+function unLockAnswers() {
+    for (i = 1; i < 5; i++) {
+        document.getElementById('answer_' + i).style.pointerEvents = 'auto';
+    }
+}
+
 
 //asking from which quiz the answers should be selected
 
@@ -99,6 +114,8 @@ function selectedQuestionHTML(selection) {
     let selectedQuestionNumber = selection.slice(-1);
 
     if (html == true) {
+        AUDIO_SUCCESS.currentTime = 0;
+        AUDIO_FAIL.currentTime = 0;
         let questionHtml = questionsHtml[currentQuestion];
         let idOfRightAnswerHtml = `answer_${questionHtml['right_answer']}`
         if (selectedQuestionNumber == questionHtml["right_answer"]) {
@@ -106,6 +123,7 @@ function selectedQuestionHTML(selection) {
             document.getElementById('next-button').disabled = false;
             rightQuestions++;
             AUDIO_SUCCESS.play();
+
         } else {
             document.getElementById(selection).parentNode.classList.add("bg-danger", "answer");
             document.getElementById(idOfRightAnswerHtml).parentNode.classList.add("bg-success", "zoom-in-out-box");
@@ -113,12 +131,15 @@ function selectedQuestionHTML(selection) {
             AUDIO_FAIL.play();
         }
     }
+    lockAnswers()
 }
 
 function selectedQuestionCss(selection) {
     let selectedQuestionNumber = selection.slice(-1);
 
     if (css == true) {
+        AUDIO_SUCCESS.currentTime = 0;
+        AUDIO_FAIL.currentTime = 0;
         let questionCss = questionsCss[currentQuestion];
         let idOfRightAnswerCss = `answer_${questionCss['right_answer']}`;
         if (selectedQuestionNumber == questionCss["right_answer"]) {
@@ -134,12 +155,15 @@ function selectedQuestionCss(selection) {
         }
 
     }
+    lockAnswers()
 }
 
 function selectedQuestionJs(selection) {
     let selectedQuestionNumber = selection.slice(-1);
 
     if (js == true) {
+        AUDIO_SUCCESS.currentTime = 0;
+        AUDIO_FAIL.currentTime = 0;
         let questionJs = questionsJs[currentQuestion];
         let idOfRightAnswerJs = `answer_${questionJs['right_answer']}`;
         if (selectedQuestionNumber == questionJs["right_answer"]) {
@@ -154,6 +178,7 @@ function selectedQuestionJs(selection) {
             AUDIO_FAIL.play();
         }
     }
+    lockAnswers()
 }
 
 function restartHtml() {
@@ -180,6 +205,22 @@ function restartJs() {
     }
 }
 
+
+function showMainStartscreen() {
+    return `
+    <div class="startscreen-box">
+        <div class="startscreen">
+            <div><h1>Wilkommen in der Quiz App !</h1></div>
+            <div><h3>Wähle ein Quiz:</h3></div>  
+        </div>
+        <div class="main-button-box">
+            <button onclick="showHtml()" class="start-button">HTML QUIZ STARTEN <img class="start-arrow" src="img/arrow-25-24.png"</button>
+            <button onclick="showCss()" class="start-button">CSS QUIZ STARTEN <img class="start-arrow" src="img/arrow-25-24.png"</button>
+            <button onclick="showJs()" class="start-button">JS QUIZ STARTEN <img class="start-arrow" src="img/arrow-25-24.png"</button>
+        </div>
+    </div>
+    `
+}
 //Startscreen for each quiz
 
 function htmlStartscreen() {
@@ -279,6 +320,7 @@ function updateToNextHtmlQuestion() {
         document.getElementById('answer_3').innerHTML = questionHtml['answer_3'];
         document.getElementById('answer_4').innerHTML = questionHtml['answer_4'];
     }
+    unLockAnswers()
 }
 
 
@@ -293,6 +335,7 @@ function updateToNextCssQuestion() {
         document.getElementById('answer_3').innerHTML = questionCss['answer_3'];
         document.getElementById('answer_4').innerHTML = questionCss['answer_4'];
     }
+    unLockAnswers()
 }
 
 function updateToNextJsQuestion() {
@@ -306,4 +349,6 @@ function updateToNextJsQuestion() {
         document.getElementById('answer_3').innerHTML = questionJs['answer_3'];
         document.getElementById('answer_4').innerHTML = questionJs['answer_4'];
     }
+    unLockAnswers()
+
 }
